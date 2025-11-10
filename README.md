@@ -94,11 +94,16 @@ Simulates mouse activity **without visible cursor movement** using offsetting Wi
 
 **Download and Run:**
 
-1. Download `MouseJiggly.exe` from the [latest release](https://github.com/aregowe/MouseJiggly/releases/latest)
-2. Double-click to run (no installation needed)
-3. Check **"Jiggle?"** for Standard Mode or **"Zen Mode?"** for invisible operation
-4. Adjust the interval slider if desired
-5. Watch the status display confirm activation
+1. Download the appropriate ZIP file from the [latest release](https://github.com/aregowe/MouseJiggly/releases/latest)
+   - `MouseJiggly-v1.0.0-standalone.zip` (no runtime needed) **← Recommended**
+   - `MouseJiggly-v1.0.0-framework-dependent.zip` (requires .NET 9.0)
+2. **Extract all files** from the ZIP to a folder (keep them together)
+3. Right-click `MouseJiggly.exe` → **Properties** → Check **"Unblock"** → **Apply** (if shown)
+4. Double-click `MouseJiggly.exe` to run
+   - If Windows shows **"Windows protected your PC"**: Click **"More info"** → **"Run anyway"**
+5. Check **"Jiggle?"** for Standard Mode or **"Zen Mode?"** for invisible operation
+6. Adjust the interval slider if desired
+7. Watch the status display confirm activation
 
 **That's it!** Your computer will stay awake as long as a mode is enabled.
 
@@ -113,43 +118,108 @@ Simulates mouse activity **without visible cursor movement** using offsetting Wi
 - **Architecture:** x64 (64-bit)
 - **Runtime:** .NET 9.0 Runtime (or use self-contained build)
 - **Privileges:** Standard user (no admin required)
-- **Disk Space:** < 1 MB
+- **Disk Space:** < 1 MB (framework-dependent) or ~60 MB (standalone)
 
 ### Installation Methods
 
-#### Method 1: Standalone Executable (No Runtime Required)
+#### Method 1: Standalone Version (No Runtime Required) - Recommended
 
-Download the self-contained release that includes everything:
+Download the self-contained ZIP that includes everything:
 
-**File:** `MouseJiggly-v1.0.0-win-x64-standalone.exe`  
-**Size:** ~60-80 MB (includes .NET runtime)
+**File:** `MouseJiggly-v1.0.0-standalone.zip`  
+**Size:** ~54 MB (includes .NET runtime)
+
+**Installation Steps:**
+1. Download `MouseJiggly-v1.0.0-standalone.zip` from the [latest release](https://github.com/aregowe/MouseJiggly/releases/latest)
+2. **Extract all files** from the ZIP to a folder (e.g., `C:\Program Files\MouseJiggly\`)
+3. Right-click `MouseJiggly.exe` → **Properties** → Check **"Unblock"** (if shown) → **Apply**
+4. Run `MouseJiggly.exe`
+
+**Package Contents:**
+- `MouseJiggly.exe` (main executable)
+- `D3DCompiler_47_cor3.dll` (DirectX compiler)
+- `PenImc_cor3.dll` (pen/touch input)
+- `PresentationNative_cor3.dll` (WPF native)
+- `vcruntime140_cor3.dll` (Visual C++ runtime)
+- `wpfgfx_cor3.dll` (WPF graphics)
 
 **Pros:**
 - ✅ No .NET installation required
 - ✅ Works on any Windows 10+ system
-- ✅ Single file deployment
+- ✅ All dependencies included
 
 **Cons:**
-- ⚠️ Larger file size due to bundled runtime
+- ⚠️ Larger download size due to bundled runtime
 
 #### Method 2: Framework-Dependent (Requires .NET 9.0)
 
 Download the lightweight version if you have .NET 9.0 installed:
 
-**File:** `MouseJiggly.exe`  
-**Size:** 157 KB
+**File:** `MouseJiggly-v1.0.0-framework-dependent.zip`  
+**Size:** ~74 KB
+
+**Installation Steps:**
+1. Download `MouseJiggly-v1.0.0-framework-dependent.zip` from the [latest release](https://github.com/aregowe/MouseJiggly/releases/latest)
+2. **Extract all files** from the ZIP to a folder
+3. Right-click `MouseJiggly.exe` → **Properties** → Check **"Unblock"** (if shown) → **Apply**
+4. Run `MouseJiggly.exe`
+
+**Package Contents:**
+- `MouseJiggly.exe` (main executable)
+- `MouseJiggly.dll` (application library)
+- `MouseJiggly.deps.json` (dependency manifest)
+- `MouseJiggly.runtimeconfig.json` (runtime configuration)
 
 **Install .NET 9.0 Runtime (if needed):**
 - Download from: https://dotnet.microsoft.com/download/dotnet/9.0
 - Install the "Desktop Runtime" package
 
 **Pros:**
-- ✅ Tiny executable size (157 KB)
+- ✅ Tiny download size (~74 KB)
 - ✅ Faster startup time
 - ✅ Shared runtime with other .NET apps
 
 **Cons:**
 - ⚠️ Requires .NET 9.0 Desktop Runtime
+
+### ⚠️ Important Notes
+
+- **Always extract ALL files** from the ZIP - the executable needs the accompanying DLL files to run
+- **Don't run directly from the ZIP** - extract first, then run
+- **Keep all extracted files together** in the same folder - never separate the .exe from its DLLs
+
+### 🛡️ Windows SmartScreen Warning
+
+When running the application for the first time, Windows SmartScreen may display a warning:
+
+**"Windows protected your PC"**  
+**"Microsoft Defender SmartScreen prevented an unrecognized app from starting"**
+
+This is **normal behavior** for unsigned applications downloaded from the internet. To proceed safely:
+
+#### Option 1: Bypass SmartScreen Warning
+1. Click **"More info"** (the link in the warning dialog)
+2. Click **"Run anyway"** button
+
+#### Option 2: Unblock Files Before Running
+1. Right-click `MouseJiggly.exe`
+2. Select **"Properties"**
+3. At the bottom of the **"General"** tab, check the box **"Unblock"**
+4. Click **"Apply"** then **"OK"**
+5. Run the application normally
+
+**Why this happens:**
+- Mouse Jiggly is not code-signed with a Microsoft Authenticode certificate
+- Code signing certificates cost $300-500/year for individual developers
+- This is a standard Windows security measure for downloaded executables
+- **The application is completely safe** - all source code is open and auditable
+- See our [Security Audit](SECURITY.md) for comprehensive analysis (zero vulnerabilities found)
+
+**For IT administrators:**
+- The application can be whitelisted in Windows Defender or your antivirus software
+- No registry modifications or system-level changes are made
+- No admin privileges required to run
+- All code is transparent and available for review
 
 ### Auto-Start on Windows Boot (Optional)
 
@@ -685,8 +755,23 @@ A: Yes! All source code is open and available in this repository.
 
 ### Troubleshooting
 
+**Q: Windows shows "Windows protected your PC" warning**  
+A: This is Windows SmartScreen protecting you from unsigned applications. The application is completely safe (see [SECURITY.md](SECURITY.md)):
+1. Click **"More info"** in the warning dialog
+2. Click **"Run anyway"** button
+3. Alternatively: Right-click `MouseJiggly.exe` → Properties → Check "Unblock" → Apply
+
 **Q: The application won't start**  
-A: Ensure you have .NET 9.0 Desktop Runtime installed. Download from [Microsoft](https://dotnet.microsoft.com/download/dotnet/9.0).
+A: 
+1. **Did you extract ALL files from the ZIP?** The .exe needs the DLL files to run (never separate them)
+2. **Did you unblock the files?** Right-click `MouseJiggly.exe` → Properties → Check "Unblock" → Apply
+3. **Using framework-dependent version?** Ensure you have .NET 9.0 Desktop Runtime installed from [Microsoft](https://dotnet.microsoft.com/download/dotnet/9.0)
+4. **Check Windows Event Viewer** for specific error messages (Administrative Tools → Event Viewer → Windows Logs → Application)
+
+**Q: "The application was unable to start correctly (0xc0000142)"**  
+A: You're missing required DLL files. Re-extract the entire ZIP and ensure ALL files are in the same folder:
+- **Standalone:** 6 files (MouseJiggly.exe + 5 DLLs)
+- **Framework-dependent:** 4 files (MouseJiggly.exe + 3 support files)
 
 **Q: Jiggle isn't working**  
 A: 
