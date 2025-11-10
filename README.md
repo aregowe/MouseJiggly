@@ -54,6 +54,12 @@ Perfect for scenarios where you need to prevent system idle states:
 
 ---
 
+## 📸 Screenshot
+
+![Mouse Jiggly Application](SS-1.png)
+
+---
+
 ## ✨ Key Features
 
 ### Two Operational Modes
