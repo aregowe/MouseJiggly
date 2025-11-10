@@ -9,7 +9,7 @@
 
 [![Security: Audited](https://img.shields.io/badge/security-audited-brightgreen.svg)](SECURITY.md)
 [![.NET 9.0](https://img.shields.io/badge/.NET-9.0-purple.svg)](https://dotnet.microsoft.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Size: 157KB](https://img.shields.io/badge/size-157KB-blue.svg)]()
 
 ---
